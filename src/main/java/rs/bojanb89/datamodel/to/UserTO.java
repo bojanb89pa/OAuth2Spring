@@ -2,22 +2,22 @@ package rs.bojanb89.datamodel.to;
 
 public class UserTO {
 	
-	public String id;
-	
 	public String username;
 	
-	public boolean enabled;
+	public Boolean enabled;
 
 	public String password;
+	
+	public String email;
 	
 	public UserTO() {
 	}
 
-	public UserTO(String id, String username, boolean enabled) {
-		this.id = id;
+	public UserTO(String username, Boolean enabled, String email) {
+		super();
 		this.username = username;
 		this.enabled = enabled;
+		this.email = email;
 	}
-	
 	
 }

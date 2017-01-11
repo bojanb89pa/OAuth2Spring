@@ -35,6 +35,11 @@ public class User extends BaseEntity implements Serializable {
 	@Getter
 	@Setter
 	private String username;
+	
+	@Column(name = "email", length = 150, unique = true)
+	@Getter
+	@Setter
+	private String email;
 
 	@Column(name = "password", length = 256)
 	@Getter

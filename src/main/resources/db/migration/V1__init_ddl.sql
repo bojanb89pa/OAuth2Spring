@@ -92,6 +92,7 @@ CREATE TABLE `user` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `version` BIGINT(20) NOT NULL DEFAULT 0,
   `username` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
   `password` VARCHAR(256) NOT NULL,
   `enabled` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`))

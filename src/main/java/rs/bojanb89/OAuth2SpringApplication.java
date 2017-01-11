@@ -58,6 +58,7 @@ public class OAuth2SpringApplication extends SpringBootServletInitializer {
 			User user = new User();
 			user.setUsername("user");
 			user.setPassword("password");
+			user.setEmail("user@mailintaor.com");
 			user.setEnabled(true);
 			Role role = new Role();
 			role.setName("CLIENT");
@@ -92,7 +93,7 @@ public class OAuth2SpringApplication extends SpringBootServletInitializer {
 
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/storage/**").permitAll().antMatchers("/health*").permitAll().and().authorizeRequests().anyRequest()
+			http.authorizeRequests().antMatchers("/signup").permitAll().antMatchers("/storage/**").permitAll().antMatchers("/health*").permitAll().and().authorizeRequests().anyRequest()
 					.authenticated();
 		}
 
