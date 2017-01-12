@@ -16,6 +16,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import rs.bojanb89.datamodel.entity.Role;
 import rs.bojanb89.datamodel.entity.User;
 import rs.bojanb89.repository.UserRepository;
+import rs.bojanb89.security.PasswordEncoder;
 import rs.bojanb89.security.UserDetailsImpl;
 
 @SpringBootApplication(exclude = { HypermediaAutoConfiguration.class })
@@ -42,6 +45,12 @@ import rs.bojanb89.security.UserDetailsImpl;
 @EnableAsync
 public class OAuth2SpringApplication extends SpringBootServletInitializer {
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AuthenticationProvider authProvider;
+	
 	// this is needed for war packaging of the applicaiton
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -57,7 +66,7 @@ public class OAuth2SpringApplication extends SpringBootServletInitializer {
 		if (repository.count() == 0) {
 			User user = new User();
 			user.setUsername("user");
-			user.setPassword("password");
+			user.setPassword(passwordEncoder.encode("password"));
 			user.setEmail("user@mailintaor.com");
 			user.setEnabled(true);
 			Role role = new Role();
@@ -66,7 +75,16 @@ public class OAuth2SpringApplication extends SpringBootServletInitializer {
 			user.setRoles(Arrays.asList(role));
 			repository.save(user);
 		}
-		auth.userDetailsService(userDetailsService(repository));
+	
+		auth.authenticationProvider(authProvider);
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider authProvider(final UserRepository repository) {
+	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	    authProvider.setUserDetailsService(userDetailsService(repository));
+	    authProvider.setPasswordEncoder(passwordEncoder);
+	    return authProvider;
 	}
 
 	@Bean
