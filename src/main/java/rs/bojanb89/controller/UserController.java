@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.bojanb89.datamodel.to.UserTO;
+import rs.bojanb89.exception.BaseException;
 import rs.bojanb89.service.UserService;
 
 @RestController
@@ -18,7 +19,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public void addUser(@RequestBody UserTO user) {
+	public void addUser(@RequestBody UserTO user) throws BaseException {
 		userService.addUser(user);
 	}
 

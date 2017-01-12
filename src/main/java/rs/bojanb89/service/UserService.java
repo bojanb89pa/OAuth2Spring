@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import rs.bojanb89.datamodel.entity.Role;
 import rs.bojanb89.datamodel.entity.User;
 import rs.bojanb89.datamodel.to.UserTO;
+import rs.bojanb89.exception.BadRequestException;
+import rs.bojanb89.exception.code.ErrorCode;
 import rs.bojanb89.repository.UserRepository;
 import rs.bojanb89.security.PasswordEncoder;
 
@@ -22,8 +24,11 @@ public class UserService {
 	UserRepository userRepository;
 	
 	
-	public void addUser(UserTO userTO) {
+	public void addUser(UserTO userTO) throws BadRequestException {
 		User user = fromTO(userTO);
+		if(userRepository.findByUsername(user.getUsername()) != null) {
+			throw new BadRequestException(ErrorCode.USER_EXISTS, "User exists");
+		}
 		userRepository.save(user);
 	}
 	
