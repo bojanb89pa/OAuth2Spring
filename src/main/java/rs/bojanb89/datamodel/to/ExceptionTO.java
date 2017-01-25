@@ -3,16 +3,14 @@ package rs.bojanb89.datamodel.to;
 public class ExceptionTO {
 
 	public int code;
-	public String codeMessage;
+	public String error;
 
 	public ExceptionTO() {
 	}
 
-	public ExceptionTO(int code, String codeMessage) {
+	public ExceptionTO(int code, String error) {
 		super();
 		this.code = code;
-		this.codeMessage = codeMessage;
+		this.error = error;
 	}
-	
-	
 }
