@@ -8,3 +8,5 @@ Open terminal at root and run:
 `$mvn flyway:migrate`
 
 `$mvn spring-boot:run`
+
+Your application will be started at http://localhost:8080.
