@@ -3,7 +3,22 @@ OAuth 2.0 backend sample for mobile applicaitons
 
 ## Usage
 
-Open terminal at root and run:
+Configure MySQL and create a database and user:
+
+> CREATE DATABASE oauth2spring CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+> CREATE USER 'oauth2spring'@'%' IDENTIFIED BY 'oauth2spring';
+
+> GRANT ALL PRIVILEGES ON oauth2spring.* TO 'oauth2spring'@'%' WITH GRANT OPTION;
+
+> FLUSH PRIVILEGES;
+
+
+Open terminal at root and complie project with following command:
+
+`$mvn clean install`
+
+and than run:
 
 `$mvn flyway:migrate`
 
