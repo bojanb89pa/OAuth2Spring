@@ -9,4 +9,4 @@ Open terminal at root and run:
 
 `$mvn spring-boot:run`
 
-Your application will be started at http://localhost:8080.
+Your application will be started at http://localhost:8080. You can check it with health route: http://localhost:8080/health.
