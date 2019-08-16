@@ -200,7 +200,7 @@
 					<user>oauth2spring</user>
 					<password>oauth2spring</password>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://localhost:3306/oauth2spring?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false</url>
+					<url>jdbc:mysql://localhost:3306/oauth2spring?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true</url>
 				</configuration>
 			</plugin>
 		</plugins>
